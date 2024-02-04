@@ -205,6 +205,21 @@ button {
   cursor: pointer;
 }
 
+.password_info {
+  font-family: "Roboto Slab", serif !important;
+  border: none;
+  font-size: 10px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+  margin: 25px 0;
+  color: #bdbdbd;
+  :hover {
+    outline: none;
+    color: transparent;
+  }
+}
+
 /* Media Query for smaller screens */
 @media (max-width: 768px) {
   .captcha-container {

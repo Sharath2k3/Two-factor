@@ -88,14 +88,17 @@ a {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      color: $font_color;
+      color: $font_color; // Assuming $font_color is a valid variable
       font-size: 13px;
+    
       input {
+        font-size: 16px; // Adjust the font-size according to your needs
+        padding: 10px;
+        transform: scale(1.2);
         -ms-transform: scale(1.2);
         -moz-transform: scale(1.2);
         -webkit-transform: scale(1.2);
         -o-transform: scale(1.2);
-        padding: 10px;
       }
     }
     .onboarding {

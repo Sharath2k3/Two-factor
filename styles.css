@@ -151,6 +151,7 @@ body {
   display: block;
   margin: 0 auto;
   max-width: 375px;
+  top: 300px;
   width: 100%;
   padding: 80px 30px 60px 30px;
   background-image: linear-gradient(

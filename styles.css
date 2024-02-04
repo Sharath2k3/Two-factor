@@ -146,12 +146,13 @@ body {
 }
 /* Add these styles to your existing CSS */
 
+/* Add these styles to your existing CSS */
+
 .captcha-container {
   font-family: "Roboto Slab", serif !important;
   display: block;
   margin: 0 auto;
   max-width: 375px;
-  top: 300px;
   width: 100%;
   padding: 80px 30px 60px 30px;
   background-image: linear-gradient(
@@ -163,6 +164,10 @@ body {
     #eaeae7
   );
   box-shadow: 10px 10px 28px -5px rgba(0, 0, 0, 0.22);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .captcha-container h2 {
@@ -200,3 +205,9 @@ button {
   cursor: pointer;
 }
 
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+  .captcha-container {
+    padding: 40px 20px;
+  }
+}

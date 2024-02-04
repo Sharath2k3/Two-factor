@@ -1,50 +1,70 @@
+<!-- secondpage.html -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-    />
+    <!-- Your existing head content here -->
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <title>UI</title>
+    <title>Second Page</title>
   </head>
   <body>
     <div class="container mt-5">
       <div class="row">
-        <div class="signUp">
-          <div class="logo">
-            <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
-            <p>Two Factor Authentication</p>
-          </div>
-          <div class="user_info">
-            <div class="user_ico">
-              <i class="fa fa-user" aria-hidden="true"></i>
-            </div>
-            <div class="clip_wrapper">
-              <input
-                type="text"
-                class="email_info"
-                id="ffa"
-                placeholder="Enter you Two factor authentication"
-              />
-
-            </div>
-            <div class="blank_wrapper"></div>
-            <div class="next_btn">Login</div>
-          </div>
-          <div class="signUp_btn">signup</div>
+        <div class="captcha-container">
+          <h2>Enter the CAPTCHA code to proceed:</h2>
+          <p id="captcha"></p>
+          <input type="text" id="captchaInput" placeholder="Enter CAPTCHA">
+          <button onclick="checkCaptcha()">Submit</button>
         </div>
       </div>
     </div>
+
+    <!-- JavaScript code -->
+    <script>
+      // Function to generate a random CAPTCHA code
+      function generateCaptcha() {
+        var captchaCode = "";
+        var possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (var i = 0; i < 6; i++) {
+          captchaCode += possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
+        }
+
+        return captchaCode;
+      }
+
+      // Function to initialize CAPTCHA on page load
+      function initializeCaptcha() {
+        var captchaElement = document.getElementById("captcha");
+        var captchaInput = document.getElementById("captchaInput");
+
+        // Generate and display CAPTCHA code
+        var captchaCode = generateCaptcha();
+        captchaElement.textContent = captchaCode;
+
+        // Store the generated CAPTCHA code for later comparison
+        captchaInput.dataset.expectedCaptcha = captchaCode;
+      }
+
+      // Function to check the entered CAPTCHA
+      function checkCaptcha() {
+        var enteredCaptcha = document.getElementById("captchaInput").value;
+        var expectedCaptcha = document.getElementById("captchaInput").dataset.expectedCaptcha;
+
+        // Compare entered CAPTCHA with the expected CAPTCHA
+        if (enteredCaptcha === expectedCaptcha) {
+          alert("CAPTCHA matched! Moving to the next page.");
+          // Redirect to the next page if the CAPTCHA is correct
+          window.location.href = "nextpage.html";
+        } else {
+          alert("CAPTCHA does not match. Please try again.");
+          // Regenerate and display a new CAPTCHA
+          initializeCaptcha();
+        }
+      }
+
+      // Call initializeCaptcha function on page load
+      window.onload = initializeCaptcha;
+    </script>
   </body>
 </html>

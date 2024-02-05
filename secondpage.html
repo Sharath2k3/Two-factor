@@ -29,15 +29,20 @@
     <!-- JavaScript code -->
     <script>
       function generateCaptcha() {
-        var captchaCode = "";
-        var possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var captchaCode = "";
+  var possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-        for (var i = 0; i < 6; i++) {
-          captchaCode += possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
-        }
+  for (var i = 0; i < 6; i++) {
+    var char = possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
 
-        return captchaCode;
-      }
+    // Add strikethrough and rotation to each character
+    char = "<span style='text-decoration: line-through; transform: rotate(20deg); display: inline-block;'>" + char + "</span>";
+
+    captchaCode += char;
+  }
+
+  return captchaCode;
+}
 
       function initializeCaptcha() {
         var captchaElement = document.getElementById("captcha");

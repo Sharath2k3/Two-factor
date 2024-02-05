@@ -1,3 +1,4 @@
+
 <!-- secondpage.html -->
 
 <!DOCTYPE html>
@@ -10,16 +11,6 @@
       /* Additional styles for the CAPTCHA image */
       #captchaImage {
         margin-top: 10px;
-      }
-
-      /* Styling for rotated and strikethrough characters */
-      .captcha-char {
-        display: inline-block;
-        transform: rotate(20deg);
-        text-decoration: line-through;
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 24px;
-        margin-right: 5px;
       }
     </style>
   </head>
@@ -43,18 +34,14 @@
         var possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
         for (var i = 0; i < 6; i++) {
-          var char = possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
-
-          // Add strikethrough and rotation to each character
-          char = "<span class='captcha-char'>" + char + "</span>";
-
-          captchaCode += char;
+          captchaCode += possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
         }
 
         return captchaCode;
       }
 
       function initializeCaptcha() {
+        var captchaElement = document.getElementById("captcha");
         var captchaInput = document.getElementById("captchaInput");
         var captchaImageContainer = document.getElementById("captchaImage");
 
@@ -62,8 +49,16 @@
         var captchaCode = generateCaptcha();
         captchaInput.dataset.expectedCaptcha = captchaCode;
 
-        var captchaImage = document.createElement("div");
-        captchaImage.innerHTML = captchaCode;
+        var canvas = document.createElement("canvas");
+        canvas.width = 120;
+        canvas.height = 40;
+        var ctx = canvas.getContext("2d");
+        ctx.font = "24px Arial";
+        ctx.fillStyle = "#000";
+        ctx.fillText(captchaCode, 10, 30);
+
+        var captchaImage = new Image();
+        captchaImage.src = canvas.toDataURL();
         captchaImageContainer.innerHTML = "";
         captchaImageContainer.appendChild(captchaImage);
       }
